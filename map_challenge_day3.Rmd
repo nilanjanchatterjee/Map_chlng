@@ -1,0 +1,41 @@
+---
+title: "30 day Map challenge"
+output:
+  html_document:
+    df_print: paged
+---
+
+These are my submissions for the 30 day map challenge. All the maps were created using R.
+
+```{r}
+library(leaflet)
+library(rgdal)
+library(htmlwidgets)
+```
+
+```{r}
+#### This reads the shapefile of cnetral Indian landscape in R 
+cil <-readOGR("D:/Global rasters/Central Indianb Landscape.kml")
+```
+
+I created an icon for marker in the leaflet package. Any image can be used as a marker in leaflet. The process is shown below in the codes.
+```{r}
+treeIcons <- iconList(
+  tree = makeIcon("C:/Users/HP/Documents/tree_icon.png","tree_icon.png", 64, 64)
+)
+```
+
+## The final map output
+
+This is the polygon of the Central Indian Landscape highlighted in the blue colour. The basemap is downloaded from the website mentioned here. I did not use the default openstreetmap as the basemap.
+
+```{r}
+m1 <- leaflet(cil) %>%
+  addTiles(urlTemplate = "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png") %>%  ##Add  map tiles
+   addPolygons(color = "blue") %>% ## Add shapefile
+  addMarkers(lng=79.56, lat=22.5076, label ="Central Indian Landscape", icon = treeIcons,
+             labelOptions = labelOptions(noHide = T, textsize = "18px"))
+
+m1
+```
+
