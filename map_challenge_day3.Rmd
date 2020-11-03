@@ -1,8 +1,9 @@
 ---
-title: "30 day Map challenge"
-output:
-  html_document:
-    df_print: paged
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 ---
 
 These are my submissions for the 30 day map challenge. All the maps were created using R.
